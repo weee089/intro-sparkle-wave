@@ -1,4 +1,5 @@
 import { FloatingIconsHero, type FloatingIconsHeroProps } from '@/components/ui/floating-icons-hero-section';
+import { useNavigate } from 'react-router-dom';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -37,6 +38,12 @@ const icons: FloatingIconsHeroProps['icons'] = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/hero');
+  };
+
   return (
     <div className="relative min-h-screen bg-background">
       <div className="absolute top-6 left-6 z-20">
@@ -47,7 +54,7 @@ const Index = () => {
         title="Welcome to WeeWeb"
         subtitle="Experience the future of web development with cutting-edge tools and technologies that empower creators worldwide."
         ctaText="Get Started"
-        ctaHref="#"
+        ctaHref="/hero"
         icons={icons}
       />
     </div>
