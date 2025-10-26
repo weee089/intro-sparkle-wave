@@ -176,8 +176,8 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={() => {
-                    console.log('Google sign in clicked');
-                    // TODO: Implement Google OAuth
+                    // Google OAuth implementation
+                    window.location.href = '/api/auth/google';
                   }}
                   className="w-full relative group/social bg-white dark:bg-card border border-border hover:border-primary/50 text-foreground font-medium h-10 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
@@ -196,8 +196,8 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={() => {
-                    console.log('GitHub sign in clicked');
-                    // TODO: Implement GitHub OAuth
+                    // GitHub OAuth implementation
+                    window.location.href = '/api/auth/github';
                   }}
                   className="w-full relative group/social bg-white dark:bg-card border border-border hover:border-primary/50 text-foreground font-medium h-10 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >

@@ -64,6 +64,17 @@ export default function Navbar() {
     }
   }, [showSignIn, mobileMenuOpen]);
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (showSignIn) setShowSignIn(false);
+        if (mobileMenuOpen) setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [showSignIn, mobileMenuOpen]);
+
   const handleSignInSuccess = () => {
     setShowSignIn(false);
     navigate('/workspace');
@@ -223,8 +234,10 @@ export default function Navbar() {
               onClick={() => setShowSignIn(false)}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             />
-            <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-              <SignInCard onSuccess={handleSignInSuccess} />
+            <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+              <div className="pointer-events-auto">
+                <SignInCard onSuccess={handleSignInSuccess} />
+              </div>
             </div>
           </>
         )}

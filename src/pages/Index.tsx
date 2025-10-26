@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FloatingIconsHero, type FloatingIconsHeroProps } from '@/components/ui/floating-icons-hero-section';
 import weewebLogo from '@/assets/weeweb-logo.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SignInCard } from '@/components/ui/sign-in-card';
 import { useNavigate } from 'react-router-dom';
@@ -50,6 +50,16 @@ const Index = () => {
     navigate('/workspace');
   };
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showSignIn) {
+        setShowSignIn(false);
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [showSignIn]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Simple Top Bar */}
@@ -94,8 +104,10 @@ const Index = () => {
               onClick={() => setShowSignIn(false)}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             />
-            <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-              <SignInCard onSuccess={handleSignInSuccess} />
+            <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+              <div className="pointer-events-auto">
+                <SignInCard onSuccess={handleSignInSuccess} />
+              </div>
             </div>
           </>
         )}
