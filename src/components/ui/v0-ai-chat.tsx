@@ -50,12 +50,7 @@ export function WeeWebChat() {
     minHeight: 60,
     maxHeight: 200
   });
-  const suggestions = [
-    "Build a landing page",
-    "Create a dashboard",
-    "Design a portfolio site",
-    "Generate a SaaS template"
-  ];
+  const suggestions = ["Build a landing page", "Create a dashboard", "Design a portfolio site", "Generate a SaaS template"];
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -75,7 +70,7 @@ export function WeeWebChat() {
             <div className="text-center min-h-[2.5rem] flex items-center justify-center">
                 <h1 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
                     <TextLoop interval={3}>
-                        {suggestions.map(text => <span key={text}>{text}</span>)}
+                        {suggestions.map(text => <span key={text} className="text-[#928638]">{text}</span>)}
                     </TextLoop>
                 </h1>
             </div>
