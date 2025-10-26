@@ -75,9 +75,7 @@ const Hero = () => {
       {/* Instructions */}
       <div className="absolute bottom-10 left-0 right-0 text-center z-20">
         
-        <p className="text-xs text-muted-foreground/60 mt-1">
-          Auto-play resumes after 3 seconds of inactivity
-        </p>
+        
       </div>
     </div>;
 };
