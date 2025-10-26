@@ -66,7 +66,7 @@ export function WeeWebChat() {
                 </h1>
                 <div className="text-xl md:text-2xl text-muted-foreground">
                     <TextLoop interval={3}>
-                        {suggestions.map(text => <span key={text} className="block font-extrabold">
+                        {suggestions.map(text => <span key={text} className="block font-light">
                                 {text}
                             </span>)}
                     </TextLoop>
