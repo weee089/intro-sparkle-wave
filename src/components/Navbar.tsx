@@ -89,7 +89,7 @@ export default function Navbar() {
       >
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/hero" className="flex items-center">
             <img src={weewebLogo} alt="WeeWeb" className="h-10" />
           </Link>
 

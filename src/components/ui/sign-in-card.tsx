@@ -4,6 +4,12 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -175,9 +181,11 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="button"
-                  onClick={() => {
-                    // Google OAuth implementation
-                    window.location.href = '/api/auth/google';
+                  onClick={async () => {
+                    await supabase.auth.signInWithOAuth({
+                      provider: 'google',
+                      options: { redirectTo: `${window.location.origin}/workspace` }
+                    });
                   }}
                   className="w-full relative group/social bg-white dark:bg-card border border-border hover:border-primary/50 text-foreground font-medium h-10 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
@@ -195,9 +203,11 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="button"
-                  onClick={() => {
-                    // GitHub OAuth implementation
-                    window.location.href = '/api/auth/github';
+                  onClick={async () => {
+                    await supabase.auth.signInWithOAuth({
+                      provider: 'github',
+                      options: { redirectTo: `${window.location.origin}/workspace` }
+                    });
                   }}
                   className="w-full relative group/social bg-white dark:bg-card border border-border hover:border-primary/50 text-foreground font-medium h-10 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >

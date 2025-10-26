@@ -6,10 +6,10 @@ import Footer from "@/components/Footer";
 
 const testimonials = [
   {
-    text: "WeeWeb transformed our web development workflow. The AI-powered tools and intuitive interface made building our platform incredibly fast.",
-    image: "https://randomuser.me/api/portraits/women/1.jpg",
+    text: "WeeWeb transformed how we build web applications. The AI assistance and real-time preview cut our development time in half!",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
     name: "Sarah Johnson",
-    role: "Product Manager",
+    role: "Founder, TechStart",
   },
   {
     text: "The best web development platform I've used. Clean interface, powerful features, and excellent support team.",
