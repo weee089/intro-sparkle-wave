@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SignInCard } from '@/components/ui/sign-in-card';
 import { useNavigate } from 'react-router-dom';
-import Footer from '@/components/Footer';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -54,7 +53,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Simple Top Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img src={weewebLogo} alt="WeeWeb" className="h-10" />
@@ -83,8 +82,6 @@ const Index = () => {
         ctaHref="/hero"
         icons={icons}
       />
-      
-      <Footer />
 
       {/* Sign In Modal */}
       <AnimatePresence>

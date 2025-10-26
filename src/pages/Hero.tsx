@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import InteractiveShader from '@/components/ui/aurora-shader';
+import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { WeeWebChat } from '@/components/ui/v0-ai-chat';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -8,26 +8,28 @@ const Hero = () => {
   return (
     <>
       <Navbar />
-      <div className="relative min-h-screen bg-[#F8F6F3] overflow-hidden">
-        {/* Aurora Shader Background - Very Light */}
-        <div className="absolute inset-0 z-0 opacity-20">
-          <Suspense fallback={
-            <div className="h-screen w-full bg-gradient-to-br from-[#F8F6F3] via-primary/5 to-[#F8F6F3]" />
-          }>
-            <InteractiveShader
-              flowSpeed={0.2}
-              colorIntensity={0.3}
-              noiseLayers={3}
-              mouseInfluence={0.1}
-            />
-          </Suspense>
-        </div>
-
-        {/* Overlay gradient - Very light skin tone */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8F6F3]/95 via-[#F5F3F0]/80 to-[#F8F6F3]/95 z-10" />
+      <div className="relative min-h-screen bg-[#FFF5F0] overflow-hidden">
+        {/* Animated Gradient Background */}
+        <AnimatedGradientBackground
+          startingGap={120}
+          Breathing={true}
+          gradientColors={[
+            "#FFF5F0",
+            "#FFE8E0",
+            "#FFD5C8",
+            "#FFC4B0",
+            "#FFB398",
+            "#FFA280",
+            "#FFF5F0"
+          ]}
+          gradientStops={[0, 20, 35, 50, 65, 80, 100]}
+          animationSpeed={0.015}
+          breathingRange={8}
+          topOffset={0}
+        />
         
-        {/* Subtle shadow overlay */}
-        <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.03)] z-10" />
+        {/* Subtle overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent z-10" />
 
         {/* Chat Interface */}
         <div className="relative z-20 flex items-center justify-center min-h-screen px-4 pt-16">
