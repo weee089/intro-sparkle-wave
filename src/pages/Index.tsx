@@ -1,5 +1,6 @@
 import { FloatingIconsHero, type FloatingIconsHeroProps } from '@/components/ui/floating-icons-hero-section';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -17,7 +18,6 @@ import {
   IconVercel,
   IconNetlify,
 } from '@/components/CompanyIcons';
-import weewebLogo from '@/assets/weeweb-logo.png';
 
 const icons: FloatingIconsHeroProps['icons'] = [
   { id: 1, icon: IconOpenAI, className: 'top-[10%] left-[8%]' },
@@ -45,19 +45,18 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-background">
-      <div className="absolute top-6 left-6 z-20">
-        <img src={weewebLogo} alt="WeeWeb" className="h-12 md:h-16" />
+    <>
+      <Navbar />
+      <div className="relative min-h-screen bg-background">
+        <FloatingIconsHero
+          title="Welcome to WeeWeb"
+          subtitle="Experience the future of web development with cutting-edge tools and technologies that empower creators worldwide."
+          ctaText="Get Started"
+          ctaHref="/hero"
+          icons={icons}
+        />
       </div>
-      
-      <FloatingIconsHero
-        title="Welcome to WeeWeb"
-        subtitle="Experience the future of web development with cutting-edge tools and technologies that empower creators worldwide."
-        ctaText="Get Started"
-        ctaHref="/hero"
-        icons={icons}
-      />
-    </div>
+    </>
   );
 };
 

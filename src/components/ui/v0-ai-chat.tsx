@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { TextLoop } from "@/components/ui/text-loop";
+import weewebLogo from '@/assets/weeweb-logo.png';
 import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound, ArrowUpIcon, Paperclip, PlusIcon } from "lucide-react";
 interface UseAutoResizeTextareaProps {
   minHeight: number;
@@ -49,7 +50,12 @@ export function WeeWebChat() {
     minHeight: 60,
     maxHeight: 200
   });
-  const suggestions = ["Create a landing page", "Design a dashboard", "Build a portfolio site", "Generate a contact form"];
+  const suggestions = [
+    "Build a landing page",
+    "Create a dashboard",
+    "Design a portfolio site",
+    "Generate a SaaS template"
+  ];
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -60,17 +66,18 @@ export function WeeWebChat() {
     }
   };
   return <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-4 space-y-8">
-            <div className="text-center space-y-4">
-                <h1 className="text-5xl md:text-7xl font-bold text-foreground">
-                    WeeWeb
-                </h1>
-                <div className="text-xl md:text-2xl text-muted-foreground">
+            {/* Logo */}
+            <div className="flex items-center justify-center mb-2">
+                <img src={weewebLogo} alt="WeeWeb" className="h-16 md:h-20 drop-shadow-2xl" />
+            </div>
+            
+            {/* Animated Suggestions */}
+            <div className="text-center min-h-[2.5rem] flex items-center justify-center">
+                <h1 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
                     <TextLoop interval={3}>
-                        {suggestions.map(text => <span key={text} className="block font-light">
-                                {text}
-                            </span>)}
+                        {suggestions.map(text => <span key={text}>{text}</span>)}
                     </TextLoop>
-                </div>
+                </h1>
             </div>
 
             <div className="w-full">
@@ -79,7 +86,7 @@ export function WeeWebChat() {
                         <Textarea ref={textareaRef} value={value} onChange={e => {
             setValue(e.target.value);
             adjustHeight();
-          }} onKeyDown={handleKeyDown} placeholder="What can I help you build?" className={cn("w-full px-4 py-3", "resize-none", "bg-transparent", "border-none", "text-foreground text-sm", "focus:outline-none", "focus-visible:ring-0 focus-visible:ring-offset-0", "placeholder:text-muted-foreground placeholder:text-sm", "min-h-[60px]")} style={{
+          }} onKeyDown={handleKeyDown} placeholder="Describe what you want to build..." className={cn("w-full px-4 py-3", "resize-none", "bg-transparent", "border-none", "text-foreground text-sm", "focus:outline-none", "focus-visible:ring-0 focus-visible:ring-offset-0", "placeholder:text-muted-foreground placeholder:text-sm", "min-h-[60px]")} style={{
             overflow: "hidden"
           }} />
                     </div>
