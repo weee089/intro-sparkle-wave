@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+// Only create Supabase client if environment variables are available
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -182,6 +182,10 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={async () => {
+                    if (!supabase) {
+                      alert('Google sign-in requires Lovable Cloud. Please enable Cloud in your project settings.');
+                      return;
+                    }
                     await supabase.auth.signInWithOAuth({
                       provider: 'google',
                       options: { redirectTo: `${window.location.origin}/workspace` }
@@ -204,6 +208,10 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={async () => {
+                    if (!supabase) {
+                      alert('GitHub sign-in requires Lovable Cloud. Please enable Cloud in your project settings.');
+                      return;
+                    }
                     await supabase.auth.signInWithOAuth({
                       provider: 'github',
                       options: { redirectTo: `${window.location.origin}/workspace` }
