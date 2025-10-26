@@ -86,7 +86,7 @@ export function WeeWebChat() {
                         <Textarea ref={textareaRef} value={value} onChange={e => {
             setValue(e.target.value);
             adjustHeight();
-          }} onKeyDown={handleKeyDown} placeholder="Describe what you want to build..." className={cn("w-full px-4 py-3", "resize-none", "bg-transparent", "border-none", "text-foreground text-sm", "focus:outline-none", "focus-visible:ring-0 focus-visible:ring-offset-0", "placeholder:text-muted-foreground placeholder:text-sm", "min-h-[60px]")} style={{
+          }} onKeyDown={handleKeyDown} placeholder="Create a dashboard..." className={cn("w-full px-4 py-3", "resize-none", "bg-transparent", "border-none", "text-foreground text-sm", "focus:outline-none", "focus-visible:ring-0 focus-visible:ring-offset-0", "placeholder:text-muted-foreground placeholder:text-sm", "min-h-[60px]")} style={{
             overflow: "hidden"
           }} />
                     </div>
@@ -95,9 +95,6 @@ export function WeeWebChat() {
                         <div className="flex items-center gap-2">
                             <button type="button" className="group p-2 hover:bg-accent rounded-lg transition-colors flex items-center gap-1">
                                 <Paperclip className="w-4 h-4 text-muted-foreground" />
-                                <span className="text-xs text-muted-foreground hidden group-hover:inline transition-opacity">
-                                    Attach
-                                </span>
                             </button>
                         </div>
                         <div className="flex items-center gap-2">

@@ -88,7 +88,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {menuItems.map((menu) => (
               <div
                 key={menu.label}
@@ -126,7 +126,7 @@ export default function Navbar() {
             ))}
             <Link
               to="/pricing"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors ml-2"
             >
               Pricing
             </Link>

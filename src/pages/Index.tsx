@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
 import { FloatingIconsHero, type FloatingIconsHeroProps } from '@/components/ui/floating-icons-hero-section';
+import weewebLogo from '@/assets/weeweb-logo.png';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SignInCard } from '@/components/ui/sign-in-card';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -38,25 +43,67 @@ const icons: FloatingIconsHeroProps['icons'] = [
 ];
 
 const Index = () => {
+  const [showSignIn, setShowSignIn] = useState(false);
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/hero');
+  const handleSignInSuccess = () => {
+    setShowSignIn(false);
+    navigate('/workspace');
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="relative min-h-screen bg-background">
-        <FloatingIconsHero
-          title="Welcome to WeeWeb"
-          subtitle="Experience the future of web development with cutting-edge tools and technologies that empower creators worldwide."
-          ctaText="Get Started"
-          ctaHref="/hero"
-          icons={icons}
-        />
-      </div>
-    </>
+    <div className="min-h-screen bg-background">
+      {/* Simple Top Bar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center">
+            <img src={weewebLogo} alt="WeeWeb" className="h-10" />
+          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowSignIn(true)}
+              className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Sign In
+            </button>
+            <Link
+              to="/hero"
+              className="px-6 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+            >
+              Get Started
+            </Link>
+          </div>
+        </nav>
+      </header>
+
+      <FloatingIconsHero
+        title="Welcome to WeeWeb"
+        subtitle="Experience the future of web development with cutting-edge tools and technologies that empower creators worldwide."
+        ctaText="Get Started"
+        ctaHref="/hero"
+        icons={icons}
+      />
+      
+      <Footer />
+
+      {/* Sign In Modal */}
+      <AnimatePresence>
+        {showSignIn && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowSignIn(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            />
+            <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+              <SignInCard onSuccess={handleSignInSuccess} />
+            </div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
