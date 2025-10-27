@@ -134,10 +134,10 @@ export default function Navbar() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <button onClick={() => setShowSignIn(true)} className="px-4 py-2 text-sm font-medium transition-colors text-slate-50">
+            <Link to="/auth" className="px-4 py-2 text-sm font-medium transition-colors text-slate-50">
               Sign In
-            </button>
-            <Link to="/register" className="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
+            </Link>
+            <Link to="/auth" className="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
               Get Started
             </Link>
           </div>
@@ -175,13 +175,10 @@ export default function Navbar() {
                   Pricing
                 </Link>
                 <div className="pt-4 space-y-2">
-                  <button onClick={() => {
-                setMobileMenuOpen(false);
-                setShowSignIn(true);
-              }} className="w-full px-4 py-2 text-sm font-medium text-foreground border border-border rounded-lg hover:bg-accent transition-colors">
+                  <Link to="/auth" className="block w-full px-4 py-2 text-sm font-medium text-foreground border border-border rounded-lg hover:bg-accent transition-colors text-center" onClick={() => setMobileMenuOpen(false)}>
                     Sign In
-                  </button>
-                  <Link to="/register" className="block w-full px-4 py-2 text-sm font-medium text-center bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                  </Link>
+                  <Link to="/auth" className="block w-full px-4 py-2 text-sm font-medium text-center bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                     Get Started
                   </Link>
                 </div>

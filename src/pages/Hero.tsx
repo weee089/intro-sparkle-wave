@@ -74,12 +74,12 @@ const Hero = () => {
       <div className="relative py-24 bg-[#0f0f0f] border-y border-white/5">
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8 px-4">
           <div className="text-center">
-            <GradientHeading variant="secondary" size="sm">
+            <p className="text-white/60 text-sm mb-2">
               The best are already here
-            </GradientHeading>
-            <GradientHeading size="xl" weight="black">
+            </p>
+            <h2 className="text-white text-4xl font-black">
               Trusted by Leading Companies
-            </GradientHeading>
+            </h2>
           </div>
           <LogoCarousel columnCount={3} logos={logos} />
         </div>
