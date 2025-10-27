@@ -68,36 +68,36 @@ export function WeeWebChat() {
             
             {/* Animated Suggestions */}
             <div className="text-center min-h-[2.5rem] flex items-center justify-center">
-                <h1 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
+                <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
                     <TextLoop interval={3}>
-                        {suggestions.map(text => <span key={text} className="text-slate-200">{text}</span>)}
+                        {suggestions.map(text => <span key={text} className="text-white">{text}</span>)}
                     </TextLoop>
                 </h1>
             </div>
 
             <div className="w-full">
-                <div className="relative bg-card/80 backdrop-blur-xl rounded-xl border border-border shadow-2xl">
+                <div className="relative bg-black/80 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl">
                     <div className="overflow-y-auto">
                         <Textarea ref={textareaRef} value={value} onChange={e => {
             setValue(e.target.value);
             adjustHeight();
-          }} onKeyDown={handleKeyDown} placeholder="Create a dashboard..." className={cn("w-full px-4 py-3", "resize-none", "bg-transparent", "border-none", "text-foreground text-sm", "focus:outline-none", "focus-visible:ring-0 focus-visible:ring-offset-0", "placeholder:text-muted-foreground placeholder:text-sm", "min-h-[60px]")} style={{
+          }} onKeyDown={handleKeyDown} placeholder="Create a dashboard..." className={cn("w-full px-4 py-3", "resize-none", "bg-transparent", "border-none", "text-white text-sm", "focus:outline-none", "focus-visible:ring-0 focus-visible:ring-offset-0", "placeholder:text-gray-400 placeholder:text-sm", "min-h-[60px]")} style={{
             overflow: "hidden"
           }} />
                     </div>
 
-                    <div className="flex items-center justify-between p-3 border-t border-border/50">
+                    <div className="flex items-center justify-between p-3 border-t border-white/10">
                         <div className="flex items-center gap-2">
-                            <button type="button" className="group p-2 hover:bg-accent rounded-lg transition-colors flex items-center gap-1">
-                                <Paperclip className="w-4 h-4 text-muted-foreground" />
+                            <button type="button" className="group p-2 hover:bg-white/10 rounded-lg transition-colors flex items-center gap-1">
+                                <Paperclip className="w-4 h-4 text-gray-400" />
                             </button>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button type="button" className="px-2 py-1 rounded-lg text-sm text-muted-foreground transition-colors border border-dashed border-border hover:border-primary hover:bg-accent/50 flex items-center justify-between gap-1">
+                            <button type="button" className="px-2 py-1 rounded-lg text-sm text-gray-400 transition-colors border border-dashed border-white/10 hover:border-primary hover:bg-white/10 flex items-center justify-between gap-1">
                                 <PlusIcon className="w-4 h-4" />
                                 Project
                             </button>
-                            <button type="button" className={cn("px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1", value.trim() ? "bg-primary text-primary-foreground border-primary shadow-sm" : "text-muted-foreground border-border hover:bg-accent")}>
+                            <button type="button" className={cn("px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1", value.trim() ? "bg-primary text-primary-foreground border-primary shadow-sm" : "text-gray-400 border-white/10 hover:bg-white/10")}>
                                 <ArrowUpIcon className="w-4 h-4" />
                                 <span className="sr-only">Send</span>
                             </button>
@@ -123,7 +123,7 @@ function ActionButton({
   icon,
   label
 }: ActionButtonProps) {
-  return <button type="button" className="flex items-center gap-2 px-4 py-2 bg-card/60 hover:bg-card/80 backdrop-blur-sm rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all shadow-sm hover:shadow-md">
+  return <button type="button" className="flex items-center gap-2 px-4 py-2 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-primary/50 transition-all shadow-sm hover:shadow-md">
             {icon}
             <span className="text-xs">{label}</span>
         </button>;

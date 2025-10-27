@@ -4,12 +4,7 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { createClient } from '@supabase/supabase-js';
-
-// Only create Supabase client if environment variables are available
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+import { supabase } from '@/integrations/supabase/client';
 
 export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,13 +29,28 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
     mouseY.set(0);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        alert(error.message);
+        setIsLoading(false);
+        return;
+      }
+      
       onSuccess?.();
-    }, 2000);
+    } catch (error) {
+      console.error('Sign in error:', error);
+      alert('An error occurred during sign in');
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -182,14 +192,13 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={async () => {
-                    if (!supabase) {
-                      alert('Google sign-in requires Lovable Cloud. Please enable Cloud in your project settings.');
-                      return;
-                    }
-                    await supabase.auth.signInWithOAuth({
+                    const { error } = await supabase.auth.signInWithOAuth({
                       provider: 'google',
                       options: { redirectTo: `${window.location.origin}/workspace` }
                     });
+                    if (error) {
+                      alert(error.message);
+                    }
                   }}
                   className="w-full relative group/social bg-white dark:bg-card border border-border hover:border-primary/50 text-foreground font-medium h-10 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
@@ -208,14 +217,13 @@ export function SignInCard({ onSuccess }: { onSuccess?: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={async () => {
-                    if (!supabase) {
-                      alert('GitHub sign-in requires Lovable Cloud. Please enable Cloud in your project settings.');
-                      return;
-                    }
-                    await supabase.auth.signInWithOAuth({
+                    const { error } = await supabase.auth.signInWithOAuth({
                       provider: 'github',
                       options: { redirectTo: `${window.location.origin}/workspace` }
                     });
+                    if (error) {
+                      alert(error.message);
+                    }
                   }}
                   className="w-full relative group/social bg-white dark:bg-card border border-border hover:border-primary/50 text-foreground font-medium h-10 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >

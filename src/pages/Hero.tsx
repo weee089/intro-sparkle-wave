@@ -1,19 +1,90 @@
 import { WeeWebChat } from '@/components/ui/v0-ai-chat';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
+import { LogoCarousel } from '@/components/ui/logo-carousel';
+import { GradientHeading } from '@/components/ui/gradient-heading';
+import {
+  IconOpenAI,
+  IconAnthropic,
+  IconGoogleDeepMind,
+  IconFigma,
+  IconFramer,
+  IconCursor,
+  IconBolt,
+  IconLovable,
+  IconReplit,
+  IconSupabase,
+  IconFirebase,
+  IconTrae,
+  IconWarp,
+  IconVercel,
+  IconNetlify
+} from '@/components/CompanyIcons';
+
+const logos = [
+  { name: "OpenAI", id: 1, img: IconOpenAI },
+  { name: "Anthropic", id: 2, img: IconAnthropic },
+  { name: "Google DeepMind", id: 3, img: IconGoogleDeepMind },
+  { name: "Figma", id: 4, img: IconFigma },
+  { name: "Framer", id: 5, img: IconFramer },
+  { name: "Cursor", id: 6, img: IconCursor },
+  { name: "Bolt", id: 7, img: IconBolt },
+  { name: "Lovable", id: 8, img: IconLovable },
+  { name: "Replit", id: 9, img: IconReplit },
+  { name: "Supabase", id: 10, img: IconSupabase },
+  { name: "Firebase", id: 11, img: IconFirebase },
+  { name: "Trae", id: 12, img: IconTrae },
+  { name: "Warp", id: 13, img: IconWarp },
+  { name: "Vercel", id: 14, img: IconVercel },
+  { name: "Netlify", id: 15, img: IconNetlify },
+];
 
 const Hero = () => {
   return (
     <>
       <Navbar />
-      <div className="relative min-h-screen overflow-hidden" style={{
-        background: 'radial-gradient(125% 125% at 50% 101%, rgba(245,87,2,1) 10.5%, rgba(245,120,2,1) 16%, rgba(245,140,2,1) 17.5%, rgba(245,170,100,1) 25%, rgba(238,174,202,1) 40%, rgba(202,179,214,1) 65%, rgba(148,201,233,1) 100%)'
-      }}>
+      <div className="relative min-h-screen overflow-hidden">
+        <AnimatedGradientBackground 
+          startingGap={125}
+          Breathing={true}
+          gradientColors={[
+            "#0A0A0A",
+            "#F55702",
+            "#F57802",
+            "#F58C02",
+            "#F5AA64",
+            "#EEAECA",
+            "#CAB3D6",
+            "#94C9E9"
+          ]}
+          gradientStops={[10.5, 16, 17.5, 25, 40, 65, 100, 100]}
+          animationSpeed={0.02}
+          breathingRange={5}
+          topOffset={0}
+        />
+        
         {/* Chat Interface */}
         <div className="relative z-20 flex items-center justify-center min-h-screen px-4 pt-16">
           <WeeWebChat />
         </div>
       </div>
+
+      {/* Logo Carousel Section */}
+      <div className="relative py-24 bg-background">
+        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8 px-4">
+          <div className="text-center">
+            <GradientHeading variant="secondary" size="sm">
+              The best are already here
+            </GradientHeading>
+            <GradientHeading size="xl" weight="black">
+              Trusted by Leading Companies
+            </GradientHeading>
+          </div>
+          <LogoCarousel columnCount={3} logos={logos} />
+        </div>
+      </div>
+
       <Footer />
     </>
   );
