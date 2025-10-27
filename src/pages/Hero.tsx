@@ -49,16 +49,16 @@ const Hero = () => {
           startingGap={125}
           Breathing={true}
           gradientColors={[
+            "#000000",
             "#0A0A0A",
-            "#F55702",
-            "#F57802",
-            "#F58C02",
-            "#F5AA64",
-            "#EEAECA",
-            "#CAB3D6",
-            "#94C9E9"
+            "#1a1a3e",
+            "#2563eb",
+            "#3b82f6",
+            "#ec4899",
+            "#f97316",
+            "#fb923c"
           ]}
-          gradientStops={[10.5, 16, 17.5, 25, 40, 65, 100, 100]}
+          gradientStops={[0, 20, 35, 50, 60, 70, 85, 100]}
           animationSpeed={0.02}
           breathingRange={5}
           topOffset={0}
