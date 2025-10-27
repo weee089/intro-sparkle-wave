@@ -3,7 +3,7 @@ import weewebLogo from '@/assets/weeweb-logo.png';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-background border-t border-border/10">
+    <footer className="relative bg-[#0f0f0f] border-t border-white/5">
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">

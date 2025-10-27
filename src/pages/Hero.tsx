@@ -71,7 +71,7 @@ const Hero = () => {
       </div>
 
       {/* Logo Carousel Section */}
-      <div className="relative py-24 bg-background/50 backdrop-blur-sm border-y border-border/10">
+      <div className="relative py-24 bg-[#0f0f0f] border-y border-white/5">
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8 px-4">
           <div className="text-center">
             <GradientHeading variant="secondary" size="sm">

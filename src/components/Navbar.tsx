@@ -127,7 +127,7 @@ export default function Navbar() {
                     </motion.div>}
                 </AnimatePresence>
               </div>)}
-            <Link to="/pricing" className="text-sm font-medium text-foreground hover:text-primary transition-colors ml-2">
+            <Link to="/pricing" className="text-sm font-medium text-slate-50 hover:text-primary transition-colors ml-2">
               Pricing
             </Link>
           </div>
