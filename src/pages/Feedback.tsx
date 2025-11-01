@@ -3,59 +3,68 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns";
 import { Mail, Instagram, Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import sarahJohnson from "@/assets/testimonials/sarah-johnson.jpg";
+import michaelChen from "@/assets/testimonials/michael-chen.jpg";
+import emmaWilliams from "@/assets/testimonials/emma-williams.jpg";
+import davidMartinez from "@/assets/testimonials/david-martinez.jpg";
+import lisaAnderson from "@/assets/testimonials/lisa-anderson.jpg";
+import jessicaTaylor from "@/assets/testimonials/jessica-taylor.jpg";
+import ryanThompson from "@/assets/testimonials/ryan-thompson.jpg";
+import sophieBrown from "@/assets/testimonials/sophie-brown.jpg";
+import jamesWilson from "@/assets/testimonials/james-wilson.jpg";
 
 const testimonials = [
   {
     text: "WeeWeb transformed how we build web applications. The AI assistance and real-time preview cut our development time in half!",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: sarahJohnson,
     name: "Sarah Johnson",
     role: "Founder, TechStart",
   },
   {
     text: "The best web development platform I've used. Clean interface, powerful features, and excellent support team.",
-    image: "https://randomuser.me/api/portraits/men/2.jpg",
+    image: michaelChen,
     name: "Michael Chen",
     role: "Frontend Developer",
   },
   {
     text: "WeeWeb's templates saved us weeks of development time. Highly customizable and production-ready.",
-    image: "https://randomuser.me/api/portraits/women/3.jpg",
+    image: emmaWilliams,
     name: "Emma Williams",
     role: "Tech Lead",
   },
   {
     text: "Exceptional platform for rapid prototyping. The AI suggestions are surprisingly accurate and helpful.",
-    image: "https://randomuser.me/api/portraits/men/4.jpg",
+    image: davidMartinez,
     name: "David Martinez",
     role: "Startup Founder",
   },
   {
     text: "Our team's productivity increased significantly after switching to WeeWeb. The collaboration features are top-notch.",
-    image: "https://randomuser.me/api/portraits/women/5.jpg",
+    image: lisaAnderson,
     name: "Lisa Anderson",
     role: "Engineering Manager",
   },
   {
     text: "WeeWeb made it possible for our small team to build enterprise-level applications quickly and efficiently.",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+    image: jessicaTaylor,
     name: "Jessica Taylor",
     role: "CTO",
   },
   {
     text: "The visual editor combined with code flexibility gives us the best of both worlds. Absolutely love it.",
-    image: "https://randomuser.me/api/portraits/men/7.jpg",
+    image: ryanThompson,
     name: "Ryan Thompson",
     role: "Full Stack Developer",
   },
   {
     text: "Customer support is incredibly responsive. They helped us migrate our entire platform seamlessly.",
-    image: "https://randomuser.me/api/portraits/women/8.jpg",
+    image: sophieBrown,
     name: "Sophie Brown",
     role: "DevOps Engineer",
   },
   {
     text: "WeeWeb's deployment pipeline is smooth and reliable. We ship updates multiple times a day with confidence.",
-    image: "https://randomuser.me/api/portraits/men/9.jpg",
+    image: jamesWilson,
     name: "James Wilson",
     role: "Senior Developer",
   },
