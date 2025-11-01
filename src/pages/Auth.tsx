@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import weeosLogo from '@/assets/weeos-logo.png';
+import weewebLogo from '@/assets/weeweb-logo.png';
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -35,16 +35,6 @@ export default function Auth() {
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
-
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        navigate('/hero');
-      }
-    };
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
   }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -125,19 +115,10 @@ export default function Auth() {
     }
   };
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      navigate('/hero');
-    }
-  };
-
   return (
-    <div 
-      className="min-h-screen bg-gradient-to-br from-[#000000] via-[#0A0A0A] to-[#1a1a3e] flex items-center justify-center p-4"
-      onClick={handleBackdropClick}
-    >
+    <div className="min-h-screen bg-gradient-to-br from-[#000000] via-[#0A0A0A] to-[#1a1a3e] flex items-center justify-center p-4">
       <Link to="/hero" className="absolute top-8 left-8">
-        <img src={weeosLogo} alt="WeeOS" className="h-10" />
+        <img src={weewebLogo} alt="WeeWeb" className="h-10" />
       </Link>
 
       <motion.div
