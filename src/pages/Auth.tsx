@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import weeosLogo from '@/assets/weeos-logo.jpg';
+import weeosLogo from '@/assets/weeos-logo.png';
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -40,7 +40,7 @@ export default function Auth() {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        navigate('/');
+        navigate('/hero');
       }
     };
     window.addEventListener('keydown', handleEscape);
@@ -127,7 +127,7 @@ export default function Auth() {
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      navigate('/');
+      navigate('/hero');
     }
   };
 

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SignInCard } from '@/components/ui/sign-in-card';
-import weeosLogo from '@/assets/weeos-logo.jpg';
+import weeosLogo from '@/assets/weeos-logo.png';
 import { cn } from '@/lib/utils';
 const menuItems = [{
   label: 'Product',
