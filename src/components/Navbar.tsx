@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SignInCard } from '@/components/ui/sign-in-card';
-import weewebLogo from '@/assets/weeweb-logo.png';
+import weeosLogo from '@/assets/weeos-logo.jpg';
 import { cn } from '@/lib/utils';
 const menuItems = [{
   label: 'Product',
@@ -97,7 +97,7 @@ export default function Navbar() {
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link to="/hero" className="flex items-center">
-            <img src={weewebLogo} alt="WeeWeb" className="h-10" />
+            <img src={weeosLogo} alt="WeeOS" className="h-10" />
           </Link>
 
           {/* Desktop Menu */}
