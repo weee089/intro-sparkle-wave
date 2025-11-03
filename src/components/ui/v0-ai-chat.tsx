@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { TextLoop } from "@/components/ui/text-loop";
@@ -42,6 +43,7 @@ function useAutoResizeTextarea({
   };
 }
 export function WeeWebChat() {
+  const navigate = useNavigate();
   const [value, setValue] = useState("");
   const {
     textareaRef,
@@ -55,9 +57,14 @@ export function WeeWebChat() {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (value.trim()) {
-        setValue("");
-        adjustHeight(true);
+        navigate('/builder');
       }
+    }
+  };
+  
+  const handleSendClick = () => {
+    if (value.trim()) {
+      navigate('/builder');
     }
   };
   return <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-4 space-y-8">
@@ -97,7 +104,11 @@ export function WeeWebChat() {
                                 <PlusIcon className="w-4 h-4" />
                                 Project
                             </button>
-                            <button type="button" className={cn("px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1", value.trim() ? "bg-primary text-primary-foreground border-primary shadow-sm" : "text-gray-400 border-white/10 hover:bg-white/10")}>
+                            <button 
+                                type="button" 
+                                onClick={handleSendClick}
+                                className={cn("px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1", value.trim() ? "bg-primary text-primary-foreground border-primary shadow-sm cursor-pointer" : "text-gray-400 border-white/10 hover:bg-white/10")}
+                            >
                                 <ArrowUpIcon className="w-4 h-4" />
                                 <span className="sr-only">Send</span>
                             </button>
