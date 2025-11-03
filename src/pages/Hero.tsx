@@ -4,8 +4,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
-import { FeaturesSection } from '@/components/FeaturesSection';
 import weewebLogo from '@/assets/weeweb-logo.png';
 import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound, ArrowUpIcon, Paperclip } from "lucide-react";
 import {
@@ -70,10 +70,10 @@ function ActionButton({ icon, label }: ActionButtonProps) {
   return (
     <button
       type="button"
-      className="flex items-center gap-2 px-5 py-3 bg-background hover:bg-muted rounded-full border border-border hover:border-primary/50 text-foreground transition-all shadow-sm hover:shadow-md hover:scale-[1.02]"
+      className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-full border border-white/10 text-gray-300 hover:text-white hover:border-primary/50 transition-all shadow-sm hover:shadow-md"
     >
       {icon}
-      <span className="text-sm font-medium">{label}</span>
+      <span className="text-sm">{label}</span>
     </button>
   );
 }
@@ -101,7 +101,7 @@ function BuilderInput() {
 
   return (
     <>
-      <div className="relative bg-white rounded-2xl border border-border shadow-2xl shadow-primary/10">
+      <div className="relative bg-[#1e293b]/80 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl">
         <div className="overflow-y-auto">
           <Textarea
             ref={textareaRef}
@@ -111,51 +111,50 @@ function BuilderInput() {
               adjustHeight();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Describe your dream website or app..."
+            placeholder="Create a dashboard..."
             className={cn(
-              "w-full px-8 py-6",
+              "w-full px-6 py-5",
               "resize-none",
               "bg-transparent",
               "border-none",
-              "text-foreground text-lg",
+              "text-white text-lg",
               "focus:outline-none",
               "focus-visible:ring-0 focus-visible:ring-offset-0",
-              "placeholder:text-muted-foreground",
-              "min-h-[160px]"
+              "placeholder:text-white/40",
+              "min-h-[140px]"
             )}
             style={{ overflow: "hidden" }}
           />
         </div>
 
-        <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-muted/30">
+        <div className="flex items-center justify-between p-4 border-t border-white/10">
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="group p-3 hover:bg-primary/10 rounded-xl transition-all border border-transparent hover:border-primary/20"
-              title="Attach files"
+              className="group p-2.5 hover:bg-white/10 rounded-lg transition-colors"
             >
-              <Paperclip className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+              <Paperclip className="w-5 h-5 text-white/60 group-hover:text-white" />
             </button>
           </div>
           <button
             type="button"
             onClick={handleSubmit}
             className={cn(
-              "px-6 py-3 rounded-xl transition-all border flex items-center justify-center gap-2 font-semibold text-base",
+              "px-5 py-2.5 rounded-lg transition-all border flex items-center justify-center gap-2 font-medium",
               value.trim()
-                ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/30 hover:shadow-primary/40 hover:bg-primary/90 hover:scale-[1.02]"
-                : "text-muted-foreground border-border bg-muted cursor-not-allowed"
+                ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:bg-primary/90"
+                : "text-white/40 border-white/10 bg-white/5 cursor-not-allowed"
             )}
             disabled={!value.trim()}
           >
-            <ArrowUpIcon className="w-5 h-5" />
+            <ArrowUpIcon className="w-4 h-4" />
             Generate
           </button>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-3 mt-10 flex-wrap">
+      <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
         <ActionButton icon={<ImageIcon className="w-4 h-4" />} label="Clone Screenshot" />
         <ActionButton icon={<Figma className="w-4 h-4" />} label="Import Figma" />
         <ActionButton icon={<FileUp className="w-4 h-4" />} label="Upload Project" />
@@ -188,42 +187,55 @@ const Hero = () => {
   return (
     <>
       <Navbar />
-      <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background">
-        {/* Builder Interface */}
-        <div className="relative z-20 flex flex-col items-center justify-start pt-24 px-4 min-h-screen">
-          <div className="w-full max-w-5xl mx-auto space-y-12">
-            {/* Large WeeWeb Logo and Title */}
-            <div className="text-center space-y-6">
-              <div className="flex items-center justify-center gap-4 animate-fade-in">
-                <img src={weewebLogo} alt="WeeWeb" className="h-20" />
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground animate-fade-in">
-                Build Your Dream Website
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-                Create stunning landing pages, dashboards, and apps with AI—no code required
-              </p>
+      <div className="relative min-h-screen overflow-hidden">
+        <AnimatedGradientBackground 
+          startingGap={125}
+          Breathing={true}
+          gradientColors={[
+            "#000000",
+            "#0A0A0A",
+            "#1a1a3e",
+            "#2563eb",
+            "#3b82f6",
+            "#ec4899",
+            "#f97316",
+            "#fb923c"
+          ]}
+          gradientStops={[0, 20, 35, 50, 60, 70, 85, 100]}
+          animationSpeed={0.02}
+          breathingRange={5}
+          topOffset={0}
+        />
+        
+      {/* Builder Interface */}
+      <div className="relative z-20 flex flex-col items-center justify-start pt-20 px-4 min-h-screen">
+        <div className="w-full max-w-5xl mx-auto space-y-8">
+          {/* Large WeeWeb Logo and Title */}
+          <div className="text-center space-y-6">
+            <div className="flex items-center justify-center gap-4">
+              <img src={weewebLogo} alt="WeeWeb" className="h-16" />
             </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+              Build a landing page
+            </h1>
+          </div>
 
-            {/* Input Area */}
-            <div className="w-full max-w-3xl mx-auto animate-fade-in">
-              <BuilderInput />
-            </div>
+          {/* Input Area */}
+          <div className="w-full max-w-3xl mx-auto">
+            <BuilderInput />
           </div>
         </div>
       </div>
-
-      {/* Features Section */}
-      <FeaturesSection />
+      </div>
 
       {/* Logo Carousel Section */}
-      <div className="relative py-24 bg-muted/30 border-y border-border">
+      <div className="relative py-24 bg-[#0f0f0f] border-y border-white/5">
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8 px-4">
           <div className="text-center">
-            <p className="text-muted-foreground text-sm mb-2">
+            <p className="text-white/60 text-sm mb-2">
               The best are already here
             </p>
-            <h2 className="text-foreground text-4xl font-black">
+            <h2 className="text-white text-4xl font-black">
               Trusted by Leading Companies
             </h2>
           </div>
