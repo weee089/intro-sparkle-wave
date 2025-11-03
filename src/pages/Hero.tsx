@@ -65,11 +65,7 @@ const Hero = () => {
         />
         
         {/* Chat Interface */}
-        <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 pt-16 space-y-6">
-          {/* Gradient Text */}
-          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#d4a574] via-[#e8c9a0] to-[#d4a574] bg-clip-text text-transparent">
-            demands.
-          </h2>
+        <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 pt-16">
           <WeeWebChat />
         </div>
       </div>
