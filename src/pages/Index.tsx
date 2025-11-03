@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SignInCard } from '@/components/ui/sign-in-card';
 import { useNavigate } from 'react-router-dom';
+import { FeaturesSection } from '@/components/FeaturesSection';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -92,6 +93,9 @@ const Index = () => {
         ctaHref="/hero"
         icons={icons}
       />
+
+      {/* Features Section */}
+      <FeaturesSection />
 
       {/* Sign In Modal */}
       <AnimatePresence>
