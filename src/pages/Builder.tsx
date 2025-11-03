@@ -30,7 +30,10 @@ const Builder = () => {
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex < simulatedActivities.length) {
-        setActivities(prev => [...prev, simulatedActivities[currentIndex]]);
+        const activity = simulatedActivities[currentIndex];
+        if (activity) {
+          setActivities(prev => [...prev, activity]);
+        }
         currentIndex++;
       } else {
         setIsBuilding(false);
@@ -107,7 +110,7 @@ const Builder = () => {
             </div>
 
             <div className="space-y-3 pt-4">
-              {activities.map((activity) => (
+              {activities.filter(Boolean).map((activity) => (
                 <div
                   key={activity.id}
                   className="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10"
