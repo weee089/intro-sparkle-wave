@@ -1,6 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -8,7 +6,8 @@ import AnimatedGradientBackground from '@/components/ui/animated-gradient-backgr
 import { LogoCarousel } from '@/components/ui/logo-carousel';
 import { TextLoop } from '@/components/ui/text-loop';
 import weewebLogo from '@/assets/weeweb-logo.png';
-import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound, ArrowUpIcon, Paperclip } from "lucide-react";
+import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound } from "lucide-react";
+import { PromptInputBox } from '@/components/ui/ai-prompt-box';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -26,41 +25,6 @@ import {
   IconVercel,
   IconNetlify
 } from '@/components/CompanyIcons';
-
-interface UseAutoResizeTextareaProps {
-  minHeight: number;
-  maxHeight?: number;
-}
-
-function useAutoResizeTextarea({ minHeight, maxHeight }: UseAutoResizeTextareaProps) {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const adjustHeight = useCallback((reset?: boolean) => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-    if (reset) {
-      textarea.style.height = `${minHeight}px`;
-      return;
-    }
-    textarea.style.height = `${minHeight}px`;
-    const newHeight = Math.max(minHeight, Math.min(textarea.scrollHeight, maxHeight ?? Number.POSITIVE_INFINITY));
-    textarea.style.height = `${newHeight}px`;
-  }, [minHeight, maxHeight]);
-  
-  useEffect(() => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = `${minHeight}px`;
-    }
-  }, [minHeight]);
-  
-  useEffect(() => {
-    const handleResize = () => adjustHeight();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [adjustHeight]);
-  
-  return { textareaRef, adjustHeight };
-}
 
 interface ActionButtonProps {
   icon: React.ReactNode;
@@ -81,81 +45,23 @@ function ActionButton({ icon, label }: ActionButtonProps) {
 
 function BuilderInput() {
   const navigate = useNavigate();
-  const [value, setValue] = useState("");
-  const { textareaRef, adjustHeight } = useAutoResizeTextarea({
-    minHeight: 60,
-    maxHeight: 200
-  });
 
-  const handleSubmit = () => {
-    if (value.trim()) {
-      const systemPrompt = `User request: ${value}
+  const handleSend = (message: string) => {
+    if (message.trim()) {
+      const systemPrompt = `User request: ${message}
 Build a dynamic, AI-powered workspace that includes automated data visualization, collaborative tools, and deployment-ready features.
 Use clean design with WeeOS branding, ensure intuitive navigation, and optimized performance.`;
       navigate('/builder', { state: { prompt: systemPrompt } });
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit();
-    }
-  };
-
   return (
     <>
-      <div className="relative bg-[#1e293b]/80 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl">
-        <div className="overflow-y-auto">
-          <Textarea
-            ref={textareaRef}
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              adjustHeight();
-            }}
-            onKeyDown={handleKeyDown}
-            placeholder="Describe what you want to build—dashboards, workflows, apps... make it yours."
-            className={cn(
-              "w-full px-6 py-5",
-              "resize-none",
-              "bg-transparent",
-              "border-none",
-              "text-white text-lg",
-              "focus:outline-none",
-              "focus-visible:ring-0 focus-visible:ring-offset-0",
-              "placeholder:text-white/40",
-              "min-h-[140px]"
-            )}
-            style={{ overflow: "hidden" }}
-          />
-        </div>
-
-        <div className="flex items-center justify-between p-4 border-t border-white/10">
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="group p-2.5 hover:bg-white/10 rounded-lg transition-colors"
-            >
-              <Paperclip className="w-5 h-5 text-white/60 group-hover:text-white" />
-            </button>
-          </div>
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className={cn(
-              "px-5 py-2.5 rounded-lg transition-all border flex items-center justify-center gap-2 font-medium",
-              value.trim()
-                ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:bg-primary/90"
-                : "text-white/40 border-white/10 bg-white/5 cursor-not-allowed"
-            )}
-            disabled={!value.trim()}
-          >
-            <ArrowUpIcon className="w-4 h-4" />
-            Generate
-          </button>
-        </div>
-      </div>
+      <PromptInputBox
+        onSend={handleSend}
+        placeholder="Describe what you want to build—dashboards, workflows, apps... make it yours."
+        className="w-full"
+      />
 
       {/* Action Buttons */}
       <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
@@ -219,9 +125,6 @@ const Hero = () => {
             <div className="flex items-center justify-center gap-4">
               <img src={weewebLogo} alt="WeeWeb" className="h-16" />
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-              Build a landing page
-            </h1>
             <div className="text-lg md:text-xl text-white/70 h-8">
               <TextLoop interval={3}>
                 <span>"Create a marketing analytics dashboard with real-time data and team collaboration."</span>
