@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
+import { TextLoop } from '@/components/ui/text-loop';
 import weewebLogo from '@/assets/weeweb-logo.png';
 import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound, ArrowUpIcon, Paperclip } from "lucide-react";
 import {
@@ -88,7 +89,10 @@ function BuilderInput() {
 
   const handleSubmit = () => {
     if (value.trim()) {
-      navigate('/builder', { state: { prompt: value } });
+      const systemPrompt = `User request: ${value}
+Build a dynamic, AI-powered workspace that includes automated data visualization, collaborative tools, and deployment-ready features.
+Use clean design with WeeOS branding, ensure intuitive navigation, and optimized performance.`;
+      navigate('/builder', { state: { prompt: systemPrompt } });
     }
   };
 
@@ -111,7 +115,7 @@ function BuilderInput() {
               adjustHeight();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Create a dashboard..."
+            placeholder="Describe what you want to build—dashboards, workflows, apps... make it yours."
             className={cn(
               "w-full px-6 py-5",
               "resize-none",
@@ -218,6 +222,15 @@ const Hero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
               Build a landing page
             </h1>
+            <div className="text-lg md:text-xl text-white/70 h-8">
+              <TextLoop interval={3}>
+                <span>"Create a marketing analytics dashboard with real-time data and team collaboration."</span>
+                <span>"Build a customer onboarding workflow with task assignments and automated notifications."</span>
+                <span>"Generate a SaaS landing page with feature sections and signup form."</span>
+                <span>"Make a personal finance tracker with categories, budget alerts, and graphs."</span>
+                <span>"Design a project management hub for remote teams with chat and file sharing."</span>
+              </TextLoop>
+            </div>
           </div>
 
           {/* Input Area */}
