@@ -162,7 +162,7 @@ Button.displayName = "Button";
 interface VoiceRecorderProps {
   isRecording: boolean;
   onStartRecording: () => void;
-  onStopRecording: (duration: number) => void;
+  onStopRecording: (duration: number, audioBlob?: Blob) => void;
   visualizerBars?: number;
 }
 const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
@@ -172,24 +172,109 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   visualizerBars = 32,
 }) => {
   const [time, setTime] = React.useState(0);
+  const [audioLevels, setAudioLevels] = React.useState<number[]>(Array(visualizerBars).fill(15));
   const timerRef = React.useRef<NodeJS.Timeout | null>(null);
+  const mediaRecorderRef = React.useRef<MediaRecorder | null>(null);
+  const audioChunksRef = React.useRef<Blob[]>([]);
+  const audioContextRef = React.useRef<AudioContext | null>(null);
+  const analyserRef = React.useRef<AnalyserNode | null>(null);
+  const animationFrameRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     if (isRecording) {
-      onStartRecording();
-      timerRef.current = setInterval(() => setTime((t) => t + 1), 1000);
+      startRecording();
     } else {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-      onStopRecording(time);
-      setTime(0);
+      stopRecording();
     }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      if (audioContextRef.current) audioContextRef.current.close();
     };
-  }, [isRecording, time, onStartRecording, onStopRecording]);
+  }, [isRecording]);
+
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+      // Set up audio context for visualization
+      audioContextRef.current = new AudioContext();
+      const source = audioContextRef.current.createMediaStreamSource(stream);
+      analyserRef.current = audioContextRef.current.createAnalyser();
+      analyserRef.current.fftSize = 64;
+      source.connect(analyserRef.current);
+      
+      // Start visualization
+      visualizeAudio();
+      
+      // Set up media recorder
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+      
+      mediaRecorderRef.current.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+      
+      mediaRecorderRef.current.start();
+      timerRef.current = setInterval(() => setTime((t) => t + 1), 1000);
+      onStartRecording();
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+      mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+      
+      const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+      onStopRecording(time, audioBlob);
+    }
+    
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    
+    if (audioContextRef.current) {
+      audioContextRef.current.close();
+      audioContextRef.current = null;
+    }
+    
+    setTime(0);
+    setAudioLevels(Array(visualizerBars).fill(15));
+  };
+
+  const visualizeAudio = () => {
+    if (!analyserRef.current) return;
+    
+    const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+    
+    const updateLevels = () => {
+      if (!analyserRef.current) return;
+      
+      analyserRef.current.getByteFrequencyData(dataArray);
+      
+      const newLevels = Array(visualizerBars).fill(0).map((_, i) => {
+        const index = Math.floor((i / visualizerBars) * dataArray.length);
+        const value = dataArray[index] || 0;
+        return Math.max(15, (value / 255) * 100);
+      });
+      
+      setAudioLevels(newLevels);
+      animationFrameRef.current = requestAnimationFrame(updateLevels);
+    };
+    
+    updateLevels();
+  };
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -209,14 +294,12 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         <span className="font-mono text-sm text-white/80">{formatTime(time)}</span>
       </div>
       <div className="w-full h-10 flex items-center justify-center gap-0.5 px-4">
-        {[...Array(visualizerBars)].map((_, i) => (
+        {audioLevels.map((level, i) => (
           <div
             key={i}
-            className="w-0.5 rounded-full bg-white/50 animate-pulse"
+            className="w-0.5 rounded-full bg-red-500/80 transition-all duration-75"
             style={{
-              height: `${Math.max(15, Math.random() * 100)}%`,
-              animationDelay: `${i * 0.05}s`,
-              animationDuration: `${0.5 + Math.random() * 0.5}s`,
+              height: `${level}%`,
             }}
           />
         ))}
@@ -545,10 +628,19 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
 
   const handleStartRecording = () => console.log("Started recording");
 
-  const handleStopRecording = (duration: number) => {
+  const handleStopRecording = (duration: number, audioBlob?: Blob) => {
     console.log(`Stopped recording after ${duration} seconds`);
     setIsRecording(false);
-    onSend(`[Voice message - ${duration} seconds]`, []);
+    
+    if (audioBlob) {
+      // Convert blob to file for sending
+      const audioFile = new File([audioBlob], `voice-recording-${Date.now()}.webm`, {
+        type: 'audio/webm'
+      });
+      onSend(`[Voice message - ${duration} seconds]`, [audioFile]);
+    } else {
+      onSend(`[Voice message - ${duration} seconds]`, []);
+    }
   };
 
   const hasContent = input.trim() !== "" || files.length > 0;

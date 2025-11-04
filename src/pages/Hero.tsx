@@ -35,10 +35,12 @@ function ActionButton({ icon, label }: ActionButtonProps) {
   return (
     <button
       type="button"
-      className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-full border border-white/10 text-gray-300 hover:text-white hover:border-primary/50 transition-all shadow-sm hover:shadow-md"
+      className="group flex items-center gap-2 px-5 py-2.5 bg-[#1F2023]/80 hover:bg-[#2E3033] backdrop-blur-sm rounded-full border border-[#444444] text-[#9CA3AF] hover:text-white hover:border-[#9b87f5]/70 transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(155,135,245,0.25)] hover:scale-105 active:scale-95"
     >
-      {icon}
-      <span className="text-sm">{label}</span>
+      <div className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+        {icon}
+      </div>
+      <span className="text-sm font-medium">{label}</span>
     </button>
   );
 }

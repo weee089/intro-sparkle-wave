@@ -5,34 +5,33 @@ import { Pricing as PricingComponent } from '@/components/ui/pricing';
 const pricingPlans = [
   {
     name: "STARTER",
-    price: "50",
-    yearlyPrice: "40",
+    price: "9",
+    yearlyPrice: "7",
     period: "month",
     features: [
-      "Up to 10 projects",
-      "Basic analytics",
-      "48-hour support response time",
-      "Limited API access",
-      "Community support",
+      "Up to 5 projects",
+      "Basic AI builder",
+      "Community templates",
+      "Email support",
+      "7-14 days free trial",
     ],
-    description: "Perfect for individuals and small projects",
+    description: "Perfect for individuals starting out",
     buttonText: "Start Free Trial",
     href: "/register",
     isPopular: false,
   },
   {
     name: "PROFESSIONAL",
-    price: "99",
-    yearlyPrice: "79",
+    price: "29",
+    yearlyPrice: "23",
     period: "month",
     features: [
       "Unlimited projects",
-      "Advanced analytics",
-      "24-hour support response time",
-      "Full API access",
-      "Priority support",
+      "Full AI orchestration",
       "Team collaboration",
-      "Custom integrations",
+      "Priority support",
+      "Optional AI credits add-on",
+      "7-14 days free trial",
     ],
     description: "Ideal for growing teams and businesses",
     buttonText: "Get Started",
@@ -41,18 +40,16 @@ const pricingPlans = [
   },
   {
     name: "ENTERPRISE",
-    price: "299",
-    yearlyPrice: "239",
-    period: "month",
+    price: "Custom",
+    yearlyPrice: "Custom",
+    period: "pricing",
     features: [
-      "Everything in Professional",
-      "Custom solutions",
-      "Dedicated account manager",
-      "1-hour support response time",
-      "SSO Authentication",
-      "Advanced security",
-      "Custom contracts",
-      "SLA agreement",
+      "All Professional features",
+      "API Access",
+      "Dedicated onboarding",
+      "SLA & Security",
+      "Premium support add-on",
+      "Custom contract terms",
     ],
     description: "For large organizations with specific needs",
     buttonText: "Contact Sales",
@@ -69,8 +66,7 @@ export default function Pricing() {
         <PricingComponent
           plans={pricingPlans}
           title="Simple, Transparent Pricing"
-          description="Choose the plan that works for you
-All plans include access to our platform, lead generation tools, and dedicated support."
+          description="Choose the plan that works for you. Annual billing includes 20% discount. All plans include access to our AI-powered platform and dedicated support."
         />
       </div>
       <Footer />
