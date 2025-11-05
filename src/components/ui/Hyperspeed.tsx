@@ -979,7 +979,7 @@ const Hyperspeed = ({
 
       const myApp = new App(container, options);
       appRef.current = myApp;
-      myApp.loadAssets().then(myApp.init);
+      myApp.loadAssets().then(() => myApp.init());
     })();
 
     return () => {
