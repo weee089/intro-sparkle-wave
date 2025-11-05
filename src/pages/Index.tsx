@@ -63,9 +63,9 @@ const Index = () => {
   }, [showSignIn]);
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen relative">
       {/* Hyperspeed Background */}
-      <div className="fixed inset-0 w-full h-full z-0">
+      <div className="fixed inset-0 w-full h-screen z-0 pointer-events-none">
         <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
@@ -106,7 +106,7 @@ const Index = () => {
       </div>
 
       {/* Simple Top Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent pointer-events-auto">
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img src={weewebLogo} alt="WeeWeb" className="h-10" />
