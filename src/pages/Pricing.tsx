@@ -60,7 +60,7 @@ const pricingPlans = [
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted">
       <Navbar />
       <div className="pt-20 md:pt-24">
         <PricingComponent

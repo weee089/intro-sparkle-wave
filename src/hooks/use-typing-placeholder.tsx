@@ -16,8 +16,8 @@ export const useTypingPlaceholder = () => {
 
   useEffect(() => {
     const currentPhrase = phrases[phraseIndex];
-    const typingSpeed = isDeleting ? 20 : 50;
-    const pauseAfterComplete = 1500;
+    const typingSpeed = isDeleting ? 30 : 80;
+    const pauseAfterComplete = 2000;
 
     if (!isDeleting && charIndex === currentPhrase.length) {
       setTimeout(() => setIsDeleting(true), pauseAfterComplete);
