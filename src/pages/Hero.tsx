@@ -122,17 +122,17 @@ const Hero = () => {
         />
         
       {/* Builder Interface */}
-      <div className="relative z-20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)]">
-        <div className="w-full max-w-5xl mx-auto space-y-6 md:space-y-8">
+      <div className="relative z-20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-screen">
+        <div className="w-full max-w-5xl mx-auto space-y-8 md:space-y-10 py-20">
           {/* Large WeeWeb Logo */}
           <div className="text-center">
-            <div className="flex items-center justify-center">
-              <img src={weewebLogo} alt="WeeWeb" className="h-12 md:h-16 lg:h-20" />
+            <div className="flex items-center justify-center mb-8">
+              <img src={weewebLogo} alt="WeeWeb" className="h-14 md:h-20 lg:h-24" />
             </div>
           </div>
 
           {/* Input Area */}
-          <div className="w-full max-w-full sm:max-w-2xl md:max-w-3xl mx-auto">
+          <div className="w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
             <BuilderInput />
           </div>
         </div>
