@@ -64,7 +64,7 @@ Use clean design with WeeOS branding, ensure intuitive navigation, and optimized
       <PromptInputBox
         onSend={handleSend}
         placeholder={placeholder || "Describe what you want to build..."}
-        className="w-full [&_textarea]:min-h-[120px] [&_textarea]:text-base [&_textarea]:md:text-lg"
+        className="w-full"
       />
 
       {/* Action Buttons */}
@@ -132,7 +132,7 @@ const Hero = () => {
           </div>
 
           {/* Input Area */}
-          <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto">
+          <div className="w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
             <BuilderInput />
           </div>
         </div>
