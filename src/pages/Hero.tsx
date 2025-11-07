@@ -6,7 +6,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
 import weewebLogo from '@/assets/weeweb-logo.png';
-import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound } from "lucide-react";
+import { Figma, Github } from "lucide-react";
 import { PromptInputBox } from '@/components/ui/ai-prompt-box';
 import { useTypingPlaceholder } from '@/hooks/use-typing-placeholder';
 import {
@@ -27,20 +27,18 @@ import {
   IconNetlify
 } from '@/components/CompanyIcons';
 
-interface ActionButtonProps {
+interface ImportButtonProps {
   icon: React.ReactNode;
   label: string;
 }
 
-function ActionButton({ icon, label }: ActionButtonProps) {
+function ImportButton({ icon, label }: ImportButtonProps) {
   return (
     <button
       type="button"
-      className="group flex items-center gap-2 px-5 py-2.5 bg-[#1F2023]/80 hover:bg-[#2E3033] backdrop-blur-sm rounded-full border border-[#444444] text-[#9CA3AF] hover:text-white hover:border-[#9b87f5]/70 transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(155,135,245,0.25)] hover:scale-105 active:scale-95"
+      className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-300"
     >
-      <div className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
-        {icon}
-      </div>
+      {icon}
       <span className="text-sm font-medium">{label}</span>
     </button>
   );
@@ -60,22 +58,11 @@ Use clean design with WeeOS branding, ensure intuitive navigation, and optimized
   };
 
   return (
-    <>
-      <PromptInputBox
-        onSend={handleSend}
-        placeholder={placeholder || "Describe what you want to build..."}
-        className="w-full"
-      />
-
-      {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 md:mt-8 flex-wrap px-4">
-        <ActionButton icon={<ImageIcon className="w-4 h-4" />} label="Clone Screenshot" />
-        <ActionButton icon={<Figma className="w-4 h-4" />} label="Import Figma" />
-        <ActionButton icon={<FileUp className="w-4 h-4" />} label="Upload Project" />
-        <ActionButton icon={<MonitorIcon className="w-4 h-4" />} label="Landing Page" />
-        <ActionButton icon={<CircleUserRound className="w-4 h-4" />} label="Sign Up Form" />
-      </div>
-    </>
+    <PromptInputBox
+      onSend={handleSend}
+      placeholder={placeholder || "Describe what you want to build..."}
+      className="w-full"
+    />
   );
 }
 
@@ -123,17 +110,37 @@ const Hero = () => {
         
       {/* Builder Interface */}
       <div className="relative z-20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-screen">
-        <div className="w-full max-w-5xl mx-auto space-y-8 md:space-y-10 py-20">
-          {/* Large WeeWeb Logo */}
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-8">
-              <img src={weewebLogo} alt="WeeWeb" className="h-14 md:h-20 lg:h-24" />
-            </div>
+        <div className="w-full max-w-6xl mx-auto space-y-12 md:space-y-16 py-20">
+          
+          {/* Hero Heading with Inline Logo */}
+          <div className="text-center space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              <span className="bg-gradient-to-b from-white via-white to-white/80 bg-clip-text text-transparent">
+                Build anything with{" "}
+              </span>
+              <span className="inline-flex items-center gap-2 md:gap-3">
+                <img src={weewebLogo} alt="WeeWeb" className="h-8 sm:h-10 md:h-12 lg:h-16 inline-block" />
+                <span className="bg-gradient-to-b from-white via-white to-white/80 bg-clip-text text-transparent">
+                  WeeWeb
+                </span>
+              </span>
+            </h1>
+            
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/60 max-w-3xl mx-auto">
+              Transform your ideas into reality with AI-powered development
+            </p>
           </div>
 
           {/* Input Area */}
-          <div className="w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+          <div className="w-full max-w-4xl mx-auto space-y-4">
             <BuilderInput />
+            
+            {/* Import Buttons */}
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <span className="text-sm text-white/40">or import from</span>
+              <ImportButton icon={<Figma className="w-4 h-4" />} label="Figma" />
+              <ImportButton icon={<Github className="w-4 h-4" />} label="GitHub" />
+            </div>
           </div>
         </div>
       </div>
