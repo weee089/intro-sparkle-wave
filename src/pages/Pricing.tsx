@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 import { Pricing as PricingComponent } from '@/components/ui/pricing';
 
 const pricingPlans = [
@@ -60,7 +61,7 @@ const pricingPlans = [
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <Navbar />
       <div className="pt-20 md:pt-24">
         <PricingComponent
@@ -70,6 +71,7 @@ export default function Pricing() {
         />
       </div>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

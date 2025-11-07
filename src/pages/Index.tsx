@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FloatingIconsHero, type FloatingIconsHeroProps } from '@/components/ui/floating-icons-hero-section';
+import ScrollToTop from '@/components/ScrollToTop';
 import weewebLogo from '@/assets/weeweb-logo.png';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -160,6 +161,7 @@ const Index = () => {
           </>
         )}
       </AnimatePresence>
+      <ScrollToTop />
     </div>
   );
 };

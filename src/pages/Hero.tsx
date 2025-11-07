@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
 import weewebLogo from '@/assets/weeweb-logo.png';
@@ -154,6 +155,7 @@ const Hero = () => {
       </div>
 
       <Footer />
+      <ScrollToTop />
     </>
   );
 };
