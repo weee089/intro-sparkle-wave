@@ -93,7 +93,7 @@ export default function Navbar() {
       y: -100
     }} animate={{
       y: 0
-    }} className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "bg-background/80 backdrop-blur-md shadow-md" : "bg-transparent")}>
+    }} className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "bg-background/60 backdrop-blur-xl shadow-lg border-b border-white/10" : "bg-background/30 backdrop-blur-md border-b border-white/5")}>
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link to="/hero" className="flex items-center">
