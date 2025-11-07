@@ -60,9 +60,9 @@ const pricingPlans = [
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted">
       <Navbar />
-      <div className="pt-16">
+      <div className="pt-20 md:pt-24">
         <PricingComponent
           plans={pricingPlans}
           title="Simple, Transparent Pricing"

@@ -247,8 +247,13 @@ const Hyperspeed = ({
           antialias: false,
           alpha: true
         });
+        this.renderer.setClearColor(0x000000, 0);
         this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
         this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.domElement.style.position = 'absolute';
+        this.renderer.domElement.style.top = '0';
+        this.renderer.domElement.style.left = '0';
+        this.renderer.domElement.style.zIndex = '0';
         this.composer = new EffectComposer(this.renderer);
         container.append(this.renderer.domElement);
 

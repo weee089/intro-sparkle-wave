@@ -4,10 +4,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
-import { TextLoop } from '@/components/ui/text-loop';
 import weewebLogo from '@/assets/weeweb-logo.png';
 import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound } from "lucide-react";
 import { PromptInputBox } from '@/components/ui/ai-prompt-box';
+import { useTypingPlaceholder } from '@/hooks/use-typing-placeholder';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -47,6 +47,7 @@ function ActionButton({ icon, label }: ActionButtonProps) {
 
 function BuilderInput() {
   const navigate = useNavigate();
+  const placeholder = useTypingPlaceholder();
 
   const handleSend = (message: string) => {
     if (message.trim()) {
@@ -61,12 +62,12 @@ Use clean design with WeeOS branding, ensure intuitive navigation, and optimized
     <>
       <PromptInputBox
         onSend={handleSend}
-        placeholder="Describe what you want to build—dashboards, workflows, apps... make it yours."
+        placeholder={placeholder || "Describe what you want to build..."}
         className="w-full"
       />
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
+      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 md:mt-8 flex-wrap px-4">
         <ActionButton icon={<ImageIcon className="w-4 h-4" />} label="Clone Screenshot" />
         <ActionButton icon={<Figma className="w-4 h-4" />} label="Import Figma" />
         <ActionButton icon={<FileUp className="w-4 h-4" />} label="Upload Project" />
@@ -120,26 +121,17 @@ const Hero = () => {
         />
         
       {/* Builder Interface */}
-      <div className="relative z-20 flex flex-col items-center justify-start pt-20 px-4 min-h-screen">
-        <div className="w-full max-w-5xl mx-auto space-y-8">
-          {/* Large WeeWeb Logo and Title */}
-          <div className="text-center space-y-6">
-            <div className="flex items-center justify-center gap-4">
-              <img src={weewebLogo} alt="WeeWeb" className="h-16" />
-            </div>
-            <div className="text-lg md:text-xl text-white/70 h-8">
-              <TextLoop interval={3}>
-                <span>"Create a marketing analytics dashboard with real-time data and team collaboration."</span>
-                <span>"Build a customer onboarding workflow with task assignments and automated notifications."</span>
-                <span>"Generate a SaaS landing page with feature sections and signup form."</span>
-                <span>"Make a personal finance tracker with categories, budget alerts, and graphs."</span>
-                <span>"Design a project management hub for remote teams with chat and file sharing."</span>
-              </TextLoop>
+      <div className="relative z-20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)]">
+        <div className="w-full max-w-5xl mx-auto space-y-6 md:space-y-8">
+          {/* Large WeeWeb Logo */}
+          <div className="text-center">
+            <div className="flex items-center justify-center">
+              <img src={weewebLogo} alt="WeeWeb" className="h-12 md:h-16 lg:h-20" />
             </div>
           </div>
 
           {/* Input Area */}
-          <div className="w-full max-w-3xl mx-auto">
+          <div className="w-full max-w-full sm:max-w-2xl md:max-w-3xl mx-auto">
             <BuilderInput />
           </div>
         </div>

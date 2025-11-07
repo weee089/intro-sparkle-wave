@@ -65,7 +65,7 @@ const Index = () => {
   return (
     <div className="min-h-screen relative">
       {/* Hyperspeed Background */}
-      <div className="fixed inset-0 w-full h-screen z-0 pointer-events-none">
+      <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
         <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
