@@ -5,10 +5,13 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
+import { AnimatedTagline } from '@/components/ui/animated-tagline';
+import { FloatingOrbs } from '@/components/ui/floating-orbs';
 import weewebLogo from '@/assets/weeweb-logo.png';
-import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound } from "lucide-react";
+import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound, Sparkles, Zap } from "lucide-react";
 import { PromptInputBox } from '@/components/ui/ai-prompt-box';
 import { useTypingPlaceholder } from '@/hooks/use-typing-placeholder';
+import { Link } from 'react-router-dom';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -121,13 +124,42 @@ const Hero = () => {
           topOffset={0}
         />
         
-      {/* Builder Interface */}
+        {/* Floating Gradient Orbs */}
+        <FloatingOrbs />
+        
+      {/* Hero Section */}
       <div className="relative z-20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)]">
-        <div className="w-full max-w-5xl mx-auto space-y-6 md:space-y-8">
+        <div className="w-full max-w-5xl mx-auto space-y-8 md:space-y-10">
           {/* Large WeeWeb Logo */}
           <div className="text-center">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center mb-6">
               <img src={weewebLogo} alt="WeeWeb" className="h-12 md:h-16 lg:h-20" />
+            </div>
+            
+            {/* Animated Tagline */}
+            <AnimatedTagline />
+            
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl text-white/70 mt-4 max-w-2xl mx-auto">
+              Transform your ideas into stunning applications with the power of AI
+            </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex items-center justify-center gap-4 mt-8 flex-wrap">
+              <Link 
+                to="/builder"
+                className="group flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                Start Building Free
+              </Link>
+              <Link 
+                to="/pricing"
+                className="group flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold text-lg border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
+              >
+                <Zap className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                View Pricing
+              </Link>
             </div>
           </div>
 
