@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SignInCard } from '@/components/ui/sign-in-card';
 import { useNavigate } from 'react-router-dom';
 import { FeaturesSection } from '@/components/FeaturesSection';
+import { DynamicVideoBackground } from '@/components/DynamicVideoBackground';
 import {
   IconOpenAI,
   IconAnthropic,
@@ -64,23 +65,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      {/* Video Background */}
-      <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover opacity-60 scale-110"
-          style={{ filter: 'blur(1px)' }}
-        >
-          <source src="/videos/black-hole-animation.mp4" type="video/mp4" />
-        </video>
-        {/* Gradient overlays for seamless integration */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 mix-blend-overlay" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,hsl(var(--background))_100%)]" />
-      </div>
+      {/* Dynamic Video Background with Color Shifts */}
+      <DynamicVideoBackground videoSrc="/videos/black-hole-animation.mp4" />
 
       {/* Simple Top Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent pointer-events-auto">
