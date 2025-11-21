@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import AnimatedGradientBackground from '@/components/ui/animated-gradient-background';
 import { LogoCarousel } from '@/components/ui/logo-carousel';
 import weewebLogo from '@/assets/weeweb-logo.png';
 import { ImageIcon, FileUp, Figma, MonitorIcon, CircleUserRound } from "lucide-react";
@@ -102,24 +101,20 @@ const Hero = () => {
     <>
       <Navbar />
       <div className="relative min-h-screen overflow-hidden">
-        <AnimatedGradientBackground 
-          startingGap={125}
-          Breathing={true}
-          gradientColors={[
-            "#000000",
-            "#0A0A0A",
-            "#1a1a3e",
-            "#2563eb",
-            "#3b82f6",
-            "#ec4899",
-            "#f97316",
-            "#fb923c"
-          ]}
-          gradientStops={[0, 20, 35, 50, 60, 70, 85, 100]}
-          animationSpeed={0.02}
-          breathingRange={5}
-          topOffset={0}
-        />
+        {/* Video Background */}
+        <div className="fixed inset-0 w-full h-full z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/videos/black-hole-animation.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
         
       {/* Builder Interface */}
       <div className="relative z-20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 min-h-screen">
