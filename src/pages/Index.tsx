@@ -71,12 +71,15 @@ const Index = () => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-60 scale-110"
+          style={{ filter: 'blur(1px)' }}
         >
           <source src="/videos/black-hole-animation.mp4" type="video/mp4" />
         </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* Gradient overlays for seamless integration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,hsl(var(--background))_100%)]" />
       </div>
 
       {/* Simple Top Bar */}
